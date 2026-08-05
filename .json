@@ -1,0 +1,24 @@
+{
+  "image": "11notes/keycloak",
+  "name": "keycloak",
+  "root": "/keycloak",
+  "semver": {
+    "version": "26.7.1"
+  },
+  "readme": {
+    "description": "run Keycloak rootless and distroless",
+    "introduction": "Keycloak provides user federation, strong authentication, user management, fine-grained authorization, and more.",
+    "built": {
+      "keycloak/keycloak": "https://github.com/keycloak/keycloak"
+    },
+    "distroless": {
+      "layers": [
+        "11notes/distroless",
+        "11notes/distroless:localhealth"
+      ]
+    },
+    "comparison": {
+      "image": "keycloak/keycloak"
+    }
+  }
+}
