@@ -1,0 +1,13 @@
+apiVersion: v2
+name: keycloak
+description: run Keycloak rootless and distroless on k8s
+type: application
+version: 0.0.1
+home: https://github.com/11notes/docker-keycloak
+sources:
+  - https://github.com/11notes/docker-keycloak
+keywords:
+  - IdP
+  - SSO
+maintainers:
+  - name: 11notes

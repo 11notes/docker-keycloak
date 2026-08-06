@@ -21,5 +21,5 @@ func main() {
 
 func start(){
 	// start keycloak
-	eleven.Container.Run("/opt/jre-minimal/bin", "java", []string{"-Xms64m", "-Xmx512m", "-Djava.security.egd=file:/dev/urandom", "-Dkc.home.dir=/opt/keycloak", "-Dkeycloak.platform.name=...", "-Djboss.server.config.dir=/keycloak/etc", "-jar", APP_JAR, "start"}, []string{"CLASSPATH_OPTS=" + APP_JAR})
+	eleven.Container.Run("/opt/jre-minimal/bin", "java", []string{"-Xms64m", "-Xmx512m", "-Djava.security.egd=file:/dev/urandom", "-Dkc.home.dir=/opt/keycloak", "-Dkeycloak.platform.name=...", "-Djboss.server.config.dir=/opt/keycloak/conf", "-jar", APP_JAR, "start"}, []string{"CLASSPATH_OPTS=" + APP_JAR})
 }
