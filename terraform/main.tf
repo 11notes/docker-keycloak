@@ -26,6 +26,10 @@ variable "keycloak_fqdn" {
   type = string
 }
 
+variable "wildcard_fqdn" {
+  type = string
+}
+
 variable "keycloak_password" {
   type = string
   sensitive = true
@@ -49,7 +53,7 @@ resource "kubernetes_secret_v1" "keycloak_password" {
   }
 
   data = {
-    KEYCLOAK_PASSWORD = trimspace(var.keycloak_passwordd)
+    KEYCLOAK_PASSWORD = trimspace(var.keycloak_password)
   }
 
   type = "Opaque"
@@ -114,7 +118,7 @@ resource "helm_release" "keycloak" {
       }
       keycloak = {
         fqdn = trimspace(var.keycloak_fqdn)
-        existingSecret = "keycloaks-password"
+        existingSecret = "keycloak-password"
         existingSecretKey = "KEYCLOAK_PASSWORD"
       }
       postgres = {
@@ -126,4 +130,41 @@ resource "helm_release" "keycloak" {
   ]
 
   depends_on = [helm_release.keycloak_db]
+}
+
+resource "kubernetes_ingress_v1" "keycloak_ingress" {
+  metadata {
+    name = "keycloak_ingress"
+    namespace = "keycloak"
+    annotations = {
+      "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+    }
+  }
+
+  spec {
+    ingress_class_name = "traefik"
+
+    tls {
+      hosts = [trimspace(var.keycloak_fqdn)]
+      secret_name = "wildcard-${replace(trimspace(var.wildcard_fqdn), ".", "-")}-tls"
+    }
+
+    rule {
+      host = trimspace(var.keycloak_fqdn)
+      http {
+        path {
+          path = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "keycloak"
+              port {
+                number = 8080
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
