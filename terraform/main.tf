@@ -134,7 +134,7 @@ resource "helm_release" "keycloak" {
 
 resource "kubernetes_ingress_v1" "keycloak_ingress" {
   metadata {
-    name = "keycloak_ingress"
+    name = "keycloak-ingress"
     namespace = "keycloak"
     annotations = {
       "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
