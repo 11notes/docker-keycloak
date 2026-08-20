@@ -11,7 +11,7 @@ services:
       postgres:
         condition: "service_healthy"
         restart: true
-    image: "11notes/keycloak:26.7.1"
+    image: "11notes/keycloak:26.7.2"
     <<: *lockdown
     environment:
       TZ: "Europe/Zurich"
