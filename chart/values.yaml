@@ -1,6 +1,6 @@
 image:
   repository: 11notes/keycloak
-  tag: "26.7.1"
+  tag: "26.7.4"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
@@ -26,7 +26,6 @@ service:
   annotations: {}
 
 podSecurityContext:
-  fsGroup: 1000
   fsGroupChangePolicy: "OnRootMismatch"
 
 containerSecurityContext:

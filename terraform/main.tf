@@ -77,7 +77,7 @@ resource "helm_release" "keycloak_db" {
   repository = "oci://ghcr.io/11notes/charts"
   chart = "postgres"
   namespace = "keycloak"
-  version = "1.0.0"
+  version = "1.1.1"
 
   wait = true
   wait_for_jobs = true
