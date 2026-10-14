@@ -4,7 +4,7 @@
   "name": "keycloak",
   "root": "/keycloak",
   "semver": {
-    "version": "26.8.0"
+    "version": "26.8.1"
   },
   "readme": {
     "description": "run Keycloak rootless and distroless",
